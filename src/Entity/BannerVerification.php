@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
     normalizationContext: ['groups' => ['bannerVerification', 'bannerVerification:read']],
 )]
 
-#[ORM\Entity(repositoryClass: bannerVerificationRepository::class)]
+#[ORM\Entity(repositoryClass: BannerVerificationRepository::class)]
 // filter by date order by date
 
 class BannerVerification
@@ -37,7 +37,7 @@ class BannerVerification
     #[Groups(['bannerVerification', 'banner:read', 'quotationRequest:read'])]
     private $createdBy;
 
-    #[ORM\ManyToOne(targetEntity: banner::class, inversedBy: 'bannerVerifications')]
+    #[ORM\ManyToOne(targetEntity: Banner::class, inversedBy: 'bannerVerifications')]
     #[Groups(['bannerVerification', 'quotationRequest:read'])]
     private $banner;
 
@@ -91,12 +91,12 @@ class BannerVerification
         return $this;
     }
 
-    public function getbanner(): ?banner
+    public function getbanner(): ?Banner
     {
         return $this->banner;
     }
 
-    public function setbanner(?banner $banner): self
+    public function setbanner(?Banner $banner): self
     {
         $this->banner = $banner;
 
@@ -112,7 +112,7 @@ class BannerVerification
         return $this->images;
     }
 
-    public function addImage(bannerVerificationImage $image): self
+    public function addImage(BannerVerificationImage $image): self
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
@@ -122,7 +122,7 @@ class BannerVerification
         return $this;
     }
 
-    public function removeImage(bannerVerificationImage $image): self
+    public function removeImage(BannerVerificationImage $image): self
     {
         if ($this->images->removeElement($image)) {
             // set the owning side to null (unless already changed)
